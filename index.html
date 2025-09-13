@@ -70,18 +70,20 @@
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
   }
 }
-</script>
-</head>
-  <body class="bg-gray-950 text-white">
-    <div class="aurora-background"></div>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  <script>
+<script>
 // Register service worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/Photo-style-editor-/sw.js')
-    .then(registration => console.log('SW registered'))
-    .catch(error => console.log('SW registration failed', error));
+  navigator.serviceWorker.register('/Photo-style-editor-/sw.js', { scope: '/Photo-style-editor-/' })
+    .then(() => console.log('SW registered'))
+    .catch(err => console.log('SW registration failed', err));
+}
+</script>
+<script>
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/Photo-style-editor-/sw.js', { scope: '/Photo-style-editor-/' })
+    .then(() => console.log('SW registered'))
+    .catch(err => console.log('SW registration failed', err));
 }
 </script>
 </body>

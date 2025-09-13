@@ -1,25 +1,33 @@
-const CACHE_NAME = "prompt-app-v1";
+// Service worker for Photo-style-editor- (GitHub Pages project site)
+const CACHE_NAME = "prompt-app-v3"; // bump this to force an update
+const BASE = "/Photo-style-editor-/";
 const ASSETS = [
-  "/Photo-style-editor-/",
-  "/Photo-style-editor-/index.html",
-  "/Photo-style-editor-/trending.html",
-  "/Photo-style-editor-/manifest.json",
-  "/Photo-style-editor-/icons/icon-192x192.png",
-  "/Photo-style-editor-/icons/icon-512x512.png"
+  BASE,
+  BASE + "index.html",
+  BASE + "trending.html",
+  BASE + "manifest.json"
 ];
 
-self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE_NAME).then((c) => c.addAll(ASSETS)));
+// Install: pre-cache core assets
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+  );
 });
 
-self.addEventListener("activate", (e) => {
-  e.waitUntil(
+// Activate: clean up old caches
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
     )
   );
+  self.clients?.claim?.();
 });
 
-self.addEventListener("fetch", (e) => {
-  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
+// Fetch: cache-first for same-origin requests
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cached) => cached || fetch(event.request))
+  );
 });

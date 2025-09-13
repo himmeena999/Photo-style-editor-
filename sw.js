@@ -1,10 +1,9 @@
 // Service worker for Photo-style-editor- (GitHub Pages project site)
-const CACHE_NAME = "prompt-app-v3"; // bump this to force an update
+const CACHE_NAME = "prompt-app-v4"; // Bumped to force update
 const BASE = "/Photo-style-editor-/";
 const ASSETS = [
   BASE,
   BASE + "index.html",
-  BASE + "trending.html",
   BASE + "manifest.json"
 ];
 

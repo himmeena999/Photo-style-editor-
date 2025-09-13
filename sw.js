@@ -1,24 +1,25 @@
-// Simple service worker for basic PWA functionality
-const CACHE_NAME = 'photo-style-editor-v1';
-const urlsToCache = [
-  '/Photo-style-editor-/',                  // root (keep trailing slash on GitHub Pages)
-  '/Photo-style-editor-/index.html',
-  '/Photo-style-editor-/style.css',         // update if your filename/path differs
-  '/Photo-style-editor-/script.js',         // update if your filename/path differs
-  '/Photo-style-editor-/icons/icon-192x192.png',
-  '/Photo-style-editor-/icons/icon-512x512.png'
+const CACHE_NAME = "prompt-app-v1";
+const ASSETS = [
+  "/Photo-style-editor-/",
+  "/Photo-style-editor-/index.html",
+  "/Photo-style-editor-/trending.html",
+  "/Photo-style-editor-/manifest.json",
+  "/Photo-style-editor-/icons/icon-192x192.png",
+  "/Photo-style-editor-/icons/icon-512x512.png"
 ];
 
-// Install event - cache files
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE_NAME).then((c) => c.addAll(ASSETS)));
+});
+
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    )
   );
 });
 
-// Fetch event - serve cached files when offline
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
-  );
+self.addEventListener("fetch", (e) => {
+  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
 });

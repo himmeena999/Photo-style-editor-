@@ -27,6 +27,22 @@ self.addEventListener("activate", (event) => {
 // Fetch: cache-first for same-origin requests
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request).then((networkResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      });
+    }).catch(() => {
+      // Fallback if both cache and network fail
+      return new Response("Offline and no cached content available.");
+    })
   );
+});
+
+// Global error handling
+self.addEventListener("error", (event) => {
+  console.error("Service Worker error:", event.message);
 });

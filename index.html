@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Fashion Stylist</title>
 
-  <!-- Tailwind CDN (ignore production warning for now) -->
+  <!-- Tailwind CDN (for testing; install properly for production) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
@@ -13,11 +13,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- PWA manifest -->
+  <!-- PWA manifest (optimized for Android) -->
   <link rel="manifest" href="/Photo-style-editor-/manifest.json">
 
-  <!-- Theme color for browser UI -->
-  <meta name="theme-color" content="#000000">
+  <!-- Theme color for Android status bar -->
+  <meta name="theme-color" content="#0b0c0f">
 
   <!-- Modern standalone hint -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -53,47 +53,32 @@
   <!-- Background glow -->
   <div class="aurora-background"></div>
 
-  <!-- App UI content (replace this placeholder with your actual dropdowns/forms if lost) -->
+  <!-- App UI content (replace this sample with your full dropdowns/forms) -->
   <main class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-6">AI Fashion Stylist</h1>
 
-    <!-- Example dropdown for dress type -->
+    <!-- Dress Type Dropdown -->
     <div class="mb-4">
       <label class="block mb-2">Dress Type</label>
       <select class="w-full p-2 bg-gray-800 rounded">
         <option>Saree</option>
         <option>Lehenga</option>
         <option>Evening Gown</option>
-        <!-- Add more options here -->
+        <!-- Add all your options here -->
       </select>
     </div>
 
-    <!-- Example dropdown for color -->
+    <!-- Color Dropdown -->
     <div class="mb-4">
       <label class="block mb-2">Color</label>
       <select class="w-full p-2 bg-gray-800 rounded">
         <option>Red</option>
         <option>Blue</option>
         <option>Green</option>
-        <!-- Add more options here -->
+        <!-- Add all your options here -->
       </select>
     </div>
 
-    <!-- Add more sections (background, feel, look, etc.) here -->
-    <!-- Example prompt output -->
+    <!-- Add more dropdowns (background, feel, look) and prompt textarea here -->
     <div class="mt-6">
-      <label class="block mb-2">Generated Prompt</label>
-      <textarea class="w-full p-2 bg-gray-800 rounded" rows="4">Your prompt will appear here...</textarea>
-    </div>
-  </main>
-
-  <!-- Service worker registration -->
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/Photo-style-editor-/sw.js', { scope: '/Photo-style-editor-/' })
-      .then(() => console.log('SW registered'))
-      .catch(err => console.log('SW registration failed', err));
-  }
-  </script>
-</body>
-</html>
+      <label class="block mb-2">Generated

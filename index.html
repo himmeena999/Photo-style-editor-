@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- PWA manifest -->
+<link rel="manifest" href="/Photo-style-editor-/manifest.json">
+
+<!-- Theme color for browser -->
+<meta name="theme-color" content="#000000">
+
+<!-- iOS support -->
+<link rel="apple-touch-icon" href="/Photo-style-editor-/icons/icon-192x192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Fashion Stylist</title>
@@ -66,5 +76,13 @@
     <div class="aurora-background"></div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
-  </body>
+  <script>
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/Photo-style-editor-/sw.js')
+    .then(registration => console.log('SW registered'))
+    .catch(error => console.log('SW registration failed', error));
+}
+</script>
+</body>
 </html>

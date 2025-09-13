@@ -1,0 +1,5 @@
+{
+  "name": "AI Fashion Stylist",
+  "description": "An application that allows users to upload a photo and apply different fashion styles, colors, and backgrounds using AI to generate a new image. Users can select from various dress types, colors, backgrounds, atmospheres, and photo looks to modify a base prompt and create a unique, stylized portrait.",
+  "requestFramePermissions": []
+}
